@@ -42,10 +42,11 @@ export class RegistroPage implements OnInit {
   }
 
 
-  async recuperar(){
+  async recuperar() {
     var f = this.formularioRecuperar.value;
     var usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
-
+  
+    // Verifica si el formulario es válido
     if (this.formularioRecuperar.invalid) {
       const alert = await this.alertController.create({
         header: '¡Error!',
@@ -55,18 +56,23 @@ export class RegistroPage implements OnInit {
       await alert.present();
       return;
     }
-
+  
+    // Verifica si el nombre de usuario existe
     if (usuario.nombre === f.nombre) {
+      // Actualiza la contraseña en el objeto usuario
       usuario.password = f.password;
       localStorage.setItem('usuario', JSON.stringify(usuario));
-
+  
+      // Actualiza también la contraseña individual en localStorage
+      localStorage.setItem('passwordUsuario', f.password);
+  
       const alert = await this.alertController.create({
         header: '¡Contraseña Restablecida!',
         message: 'Tu contraseña ha sido actualizada correctamente.',
         buttons: ['Aceptar']
       });
       await alert.present();
-
+  
       this.navCtrl.navigateRoot('login');
     } else {
       const alert = await this.alertController.create({
@@ -76,7 +82,7 @@ export class RegistroPage implements OnInit {
       });
       await alert.present();
     }
-    
   }
+  
 
 }
