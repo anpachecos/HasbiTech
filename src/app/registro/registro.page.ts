@@ -17,14 +17,14 @@ import { AlertController, NavController } from '@ionic/angular';
 
 export class RegistroPage implements OnInit {
 
-  formularioRegistro: FormGroup;
+  formularioRecuperar: FormGroup;
 
   constructor(
     public fb: FormBuilder, 
     public alertController: AlertController,
     public navCtrl: NavController  ) { 
     
-    this.formularioRegistro = this.fb.group({
+    this.formularioRecuperar = this.fb.group({
       'nombre': new FormControl("", Validators.required),
       'password': new FormControl("", Validators.required),
       'confirmacionPassword': new FormControl("", Validators.required),
@@ -35,38 +35,54 @@ export class RegistroPage implements OnInit {
   ngOnInit() {
   }
 
-  async guardar(){
-    var f = this.formularioRegistro.value;
-
-    
-    if (this.formularioRegistro.invalid){
-        const alert = await this.alertController.create({
-          header: '¡Faltan datos!',
-          message: 'Por favor, completa todos los campos para registrarte',
-          buttons: ['Aceptar'],
-        });
-  
-      await alert.present();
-      return; //Para evitar que la función continue.
-    } else {
-      var usuario = {
-        nombre: f.nombre,
-        password: f.password,
-      };
-
-      localStorage.setItem('usuario', JSON.stringify(usuario));
-
-      const alert = await this.alertController.create({
-          header: '¡Registro Completo!',
-          message: 'Ya puedes ingresar con tu usuario y contraseña',
-          buttons: ['Aceptar']
-      });
-
-      await alert.present();
-      this.navCtrl.navigateRoot('login'); // Opcional: Navegar al login después de registrarse.
-
-    }
-    
+  passwordMatchValidator(formGroup: FormGroup) {
+    const password = formGroup.get('password')?.value;
+    const confirmPassword = formGroup.get('confirmacionPassword')?.value;
+    return password === confirmPassword ? null : { mismatch: true };
   }
+
+
+  async recuperar() {
+    var f = this.formularioRecuperar.value;
+    var usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+  
+    // Verifica si el formulario es válido
+    if (this.formularioRecuperar.invalid) {
+      const alert = await this.alertController.create({
+        header: '¡Error!',
+        message: 'Por favor, asegúrate de que las contraseñas coincidan y que todos los campos estén completos.',
+        buttons: ['Aceptar']
+      });
+      await alert.present();
+      return;
+    }
+  
+    // Verifica si el nombre de usuario existe
+    if (usuario.nombre === f.nombre) {
+      // Actualiza la contraseña en el objeto usuario
+      usuario.password = f.password;
+      localStorage.setItem('usuario', JSON.stringify(usuario));
+  
+      // Actualiza también la contraseña individual en localStorage
+      localStorage.setItem('passwordUsuario', f.password);
+  
+      const alert = await this.alertController.create({
+        header: '¡Contraseña Restablecida!',
+        message: 'Tu contraseña ha sido actualizada correctamente.',
+        buttons: ['Aceptar']
+      });
+      await alert.present();
+  
+      this.navCtrl.navigateRoot('login');
+    } else {
+      const alert = await this.alertController.create({
+        header: '¡Error!',
+        message: 'El nombre de usuario no existe.',
+        buttons: ['Aceptar']
+      });
+      await alert.present();
+    }
+  }
+  
 
 }
