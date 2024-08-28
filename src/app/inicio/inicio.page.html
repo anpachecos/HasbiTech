@@ -1,22 +1,23 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>SkeletonApp</ion-title>
+    <ion-title>RegistrApp</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Bienvenido!</ion-card-title>
+      <ion-card-title>Bienvenido! {{ nombreUsuario }}</ion-card-title>
     </ion-card-header>
-
-    <ion-card-content>
-      <h1>Usuario: {{ nombreUsuario }}</h1>
-    </ion-card-content>
   </ion-card>
 
   <ion-card>
     <ion-card-header>Información Adicional</ion-card-header>
 
   </ion-card>
+
+  <ion-button (click)="cerrarSesion()">
+    Cerrar Sesión
+  </ion-button>
+  
 </ion-content>

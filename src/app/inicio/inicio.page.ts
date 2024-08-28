@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-inicio',
@@ -9,13 +10,25 @@ export class InicioPage implements OnInit {
 
   nombreUsuario: string = '';
   
-  constructor() { 
+  constructor(public navCtrl: NavController) { 
   }
   
 
   ngOnInit() {
     this.nombreUsuario = localStorage.getItem('nombreUsuario') || '';
 
+  }
+
+  cerrarSesion() {
+    // Eliminar el indicador de que el usuario está autenticado
+    localStorage.removeItem('ingresado');
+    // Opción adicional: También puedes eliminar otros ítems relacionados con la sesión del usuario
+    // localStorage.removeItem('usuario');
+    // localStorage.removeItem('nombreUsuario');
+    // localStorage.removeItem('passwordUsuario');
+
+    // Redirigir al usuario a la página de login
+    this.navCtrl.navigateRoot('login');
   }
 
   
