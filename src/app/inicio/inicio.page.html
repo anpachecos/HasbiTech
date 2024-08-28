@@ -1,23 +1,56 @@
+<ion-menu contentId="main-content" side="start">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>RegistrApp</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-menu-toggle auto-hide="false">
+        <ion-item routerLink="/mis-asistencias">
+          <ion-icon slot="start" name="people-outline"></ion-icon>
+          <ion-label>Mis Asistencias</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle auto-hide="false">
+        <ion-item (click)="cerrarSesion()">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
+          <ion-label>Cerrar Sesión</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<!-- The main content that the menu will cover -->
+<ion-router-outlet id="main-content"></ion-router-outlet>
+
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>RegistrApp</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content id="main-content" [fullscreen]="true">
   <ion-card>
     <ion-card-header>
       <ion-card-title>Bienvenido! {{ nombreUsuario }}</ion-card-title>
     </ion-card-header>
   </ion-card>
-
-  <ion-card>
-    <ion-card-header>Información Adicional</ion-card-header>
-
-  </ion-card>
-
-  <ion-button (click)="cerrarSesion()">
-    Cerrar Sesión
-  </ion-button>
-  
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon slot="icon-only" name="qr-code-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Escanear Código QR</ion-title>
+  </ion-toolbar>
+</ion-footer>

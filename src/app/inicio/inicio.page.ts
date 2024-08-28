@@ -22,11 +22,14 @@ export class InicioPage implements OnInit {
   cerrarSesion() {
     // Eliminar el indicador de que el usuario está autenticado
     localStorage.removeItem('ingresado');
+   
     // Opción adicional: También puedes eliminar otros ítems relacionados con la sesión del usuario
     // localStorage.removeItem('usuario');
     // localStorage.removeItem('nombreUsuario');
     // localStorage.removeItem('passwordUsuario');
+    // pero  no lo vamos a hacer jijiji
 
+    
     // Redirigir al usuario a la página de login
     this.navCtrl.navigateRoot('login');
   }
