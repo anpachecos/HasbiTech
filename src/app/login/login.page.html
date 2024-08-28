@@ -5,9 +5,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
-
-
   <ion-card>
     <ion-card-header>
       <ion-card-title>Iniciar Sesión</ion-card-title>
@@ -35,8 +32,13 @@
 <ion-footer>
   <ion-toolbar color = "primary">
     <ion-buttons slot ="end">
-      <ion-button [routerLink] = "['/registro']">Olvidaste tu contraseña? Recuperala Aquí</ion-button>
-
+      <ion-button [routerLink] = "['/registro']">Recuperar Contraseña</ion-button>
     </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-title size="small" text-center>
+      © 2024 HasbiTech. Todos los derechos reservados.
+    </ion-title>
   </ion-toolbar>
 </ion-footer>
