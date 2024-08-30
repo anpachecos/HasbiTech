@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-
+import { PhotosService } from '../photos.service';
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.page.html',
@@ -12,7 +12,10 @@ export class InicioPage implements OnInit {
   fechaHoy!: string;
 
   
-  constructor(public navCtrl: NavController) { 
+  constructor(public navCtrl: NavController,
+    private photoService: PhotosService
+  ) { 
+    this.photos = this.photoService.photos;
   }
   
 
@@ -27,7 +30,11 @@ export class InicioPage implements OnInit {
     });
   }
 
+  photos: string[] = [];
 
+  async takePhoto(){
+    await this.photoService.addNewPhoto();
+  }
   
 
   cerrarSesion() {
