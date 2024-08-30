@@ -13,4 +13,10 @@
     color: #555; /* Color gris para el texto secundario */
     margin-top: 5px;
   }
+
+  .image-container {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente, si es necesario */
+  }
   
