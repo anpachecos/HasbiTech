@@ -44,28 +44,31 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-    <!-- Botón de calendario a la izquierda -->
-    <ion-buttons slot="start">
-      <ion-button>
-        <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+  <ion-footer>
+    <ion-toolbar>
+      <!-- Botón de calendario a la izquierda -->
+      <ion-buttons slot="start">
+        <ion-button>
+          <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
   
-    <!-- Botón de QR al centro -->
-    <ion-buttons slot="primary" class="center-qr-button">
-      <ion-button>
+      <!-- Botón de ajustes a la derecha -->
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  
+    <!-- Botón de QR sobreelevado -->
+    <div class="qr-button-container">
+      <ion-button class="qr-button">
         <ion-icon slot="icon-only" name="qr-code-outline"></ion-icon>
       </ion-button>
-    </ion-buttons>
+    </div>
+  </ion-footer>
   
-    <!-- Botón de ajustes a la derecha -->
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>  
 
   <ion-footer>
     <ion-toolbar>
