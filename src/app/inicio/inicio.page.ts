@@ -9,6 +9,8 @@ import { NavController } from '@ionic/angular';
 export class InicioPage implements OnInit {
 
   nombreUsuario: string = '';
+  fechaHoy!: string;
+
   
   constructor(public navCtrl: NavController) { 
   }
@@ -16,8 +18,17 @@ export class InicioPage implements OnInit {
 
   ngOnInit() {
     this.nombreUsuario = localStorage.getItem('nombreUsuario') || '';
+    const hoy = new Date();
 
+    this.fechaHoy = hoy.toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
   }
+
+
+  
 
   cerrarSesion() {
     // Eliminar el indicador de que el usuario está autenticado
