@@ -24,7 +24,6 @@
   </ion-content>
 </ion-menu>
 
-<!-- The main content that the menu will cover -->
 <ion-router-outlet id="main-content"></ion-router-outlet>
 
 <ion-header [translucent]="true">
@@ -46,14 +45,27 @@
 
 <ion-footer>
   <ion-toolbar>
+    <!-- Botón de calendario a la izquierda -->
     <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  
+    <!-- Botón de QR al centro -->
+    <ion-buttons slot="primary" class="center-qr-button">
       <ion-button>
         <ion-icon slot="icon-only" name="qr-code-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Escanear Código QR</ion-title>
-  </ion-toolbar>
-
+  
+    <!-- Botón de ajustes a la derecha -->
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>  
 
   <ion-footer>
     <ion-toolbar>
