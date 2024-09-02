@@ -47,6 +47,8 @@
   
 </ion-content>
 
+  <ion-img [src]= "photo" *ngFor="let photo of photos"></ion-img>
+
 <ion-footer>
   <ion-footer>
     <ion-toolbar>
@@ -67,7 +69,7 @@
   
     <!-- Botón de QR sobreelevado -->
     <div class="qr-button-container">
-      <ion-button class="qr-button">
+      <ion-button class="qr-button" (click)="takePhoto()"> <!-- Llama a la función takePhoto() -->
         <ion-icon slot="icon-only" name="qr-code-outline"></ion-icon>
       </ion-button>
     </div>
