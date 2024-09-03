@@ -28,9 +28,11 @@ const routes: Routes = [
     path: 'welcome',
     loadChildren: () => import('./welcome/welcome.module').then( m => m.WelcomePageModule),
     canActivate: [NoIngresadoGuard]
-  },  {
+  },
+  {
     path: 'mis-asistencias',
-    loadChildren: () => import('./mis-asistencias/mis-asistencias.module').then( m => m.MisAsistenciasPageModule)
+    loadChildren: () => import('./mis-asistencias/mis-asistencias.module').then( m => m.MisAsistenciasPageModule),
+    canActivate: [IngresadoGuard]
   },
 
 
