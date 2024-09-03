@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class MisAsistenciasPage {
 
-  // Acá puse un array con asistencias, asi que si quieren más se pueden crear aquí y se listarán en el html. 
+  // Array con asistencias
   asistencias = [
     {
       titulo: 'ÉTICA PARA EL TRABAJO',
@@ -35,6 +35,18 @@ export class MisAsistenciasPage {
     }
   ];
 
+  searchQuery: string = ''; // Término de búsqueda
+  filteredAsistencias = [...this.asistencias]; // Array para las asistencias filtradas
+
   constructor() { }
 
+  filterAsistencias() {
+    const query = this.searchQuery.toLowerCase();
+    this.filteredAsistencias = this.asistencias.filter(asistencia => 
+      asistencia.titulo.toLowerCase().includes(query) ||
+      asistencia.fecha.toLowerCase().includes(query) ||
+      asistencia.ubicacion.toLowerCase().includes(query) ||
+      asistencia.descripcion.toLowerCase().includes(query)
+    );
+  }
 }
