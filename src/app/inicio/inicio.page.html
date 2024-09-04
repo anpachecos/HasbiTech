@@ -49,6 +49,7 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- Main content -->
 <ion-content id="main-content" [fullscreen]="true">
   <ion-card>
     <ion-card-header>
@@ -57,9 +58,29 @@
     </ion-card-header>
   </ion-card>
 
+  <!-- Tabla de clases del día -->
+  <ion-card class="item-bordered">
+    <ion-card-header>
+      <ion-card-title class="custom-title">Tus clases de hoy</ion-card-title>
+    </ion-card-header>
+    <ion-card-content >
+      <ion-list>
+        <ion-item *ngFor="let clase of clasesHoy" >
+          <ion-label>
+            <h2>{{ clase.titulo }}</h2>
+            <p><strong>Fecha:</strong> {{ clase.fecha }}</p>
+            <p><strong>Ubicación:</strong> {{ clase.ubicacion }}</p>
+            <p><strong>Descripción:</strong> {{ clase.descripcion }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <!-- Mostrar las fotos del usuario -->
   <ion-img [src]="photo" *ngFor="let photo of photos"></ion-img>
 </ion-content>
 
+<!-- Footer -->
 <ion-footer>
   <ion-toolbar>
     <!-- Botón de calendario a la izquierda -->

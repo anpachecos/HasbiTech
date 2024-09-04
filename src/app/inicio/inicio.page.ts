@@ -36,6 +36,20 @@ export class InicioPage implements OnInit {
     await this.photoService.addNewPhoto();
   }
   
+  clasesHoy = [
+    {
+      titulo: 'PROGRAMACIÓN DE APLICACIONES MÓVILES',
+      fecha: '2024-09-05',
+      ubicacion: 'SALA SJ-L7',
+      descripcion: 'Sección PGY4121'
+    },
+    {
+      titulo: 'ESTADÍSTICA DESCRIPTIVA',
+      fecha: '2024-09-07',
+      ubicacion: 'SALA SJ-L4',
+      descripcion: 'Sección MAT4140'
+    }
+  ];
 
   cerrarSesion() {
     // Eliminar el indicador de que el usuario está autenticado

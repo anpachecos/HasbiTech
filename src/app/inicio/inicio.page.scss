@@ -33,4 +33,11 @@
     /* Además, puedes hacer que el tamaño escale con la ventana de visualización */
     font-size: 4vw; /* Escala según el ancho de la ventana */
   }
+
+  .item-bordered {
+    border: 2px solid var(--ion-color-primary);
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
   
