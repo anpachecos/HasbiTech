@@ -1,7 +1,10 @@
 <ion-menu contentId="main-content" side="start">
   <ion-header>
     <ion-toolbar color="primary">
-      <ion-title>RegistrApp</ion-title>
+      <ion-title>
+        <ion-text color="light">Duoc</ion-text>
+        <ion-text color="warning">Assist</ion-text>
+      </ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -33,12 +36,16 @@
 
 <ion-router-outlet id="main-content"></ion-router-outlet>
 
+<!-- Header for the main content -->
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>RegistrApp</ion-title>
+    <ion-title>
+      <ion-text color="light">Duoc</ion-text>
+      <ion-text color="warning">Assist</ion-text>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -47,48 +54,39 @@
     <ion-card-header>
       <ion-card-title class="custom-title">Bienvenido {{ nombreUsuario }}</ion-card-title>
       <ion-card-subtitle>{{ fechaHoy }}</ion-card-subtitle>
-
     </ion-card-header>
   </ion-card>
 
-  
+  <ion-img [src]="photo" *ngFor="let photo of photos"></ion-img>
 </ion-content>
 
-  <ion-img [src]= "photo" *ngFor="let photo of photos"></ion-img>
-
 <ion-footer>
-  <ion-footer>
-    <ion-toolbar>
-      <!-- Botón de calendario a la izquierda -->
-      <ion-buttons slot="start">
-        <ion-button>
-          <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-  
-      <!-- Botón de ajustes a la derecha -->
-      <ion-buttons slot="end">
-        <ion-button>
-          <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  
-    <!-- Botón de QR sobreelevado -->
-    <div class="qr-button-container">
-      <ion-button class="qr-button" (click)="takePhoto()"> <!-- Llama a la función takePhoto() -->
-        <ion-icon slot="icon-only" name="qr-code-outline"></ion-icon>
+  <ion-toolbar>
+    <!-- Botón de calendario a la izquierda -->
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
       </ion-button>
-    </div>
-  </ion-footer>
-  
+    </ion-buttons>
 
-  <ion-footer>
-    <ion-toolbar>
-      <ion-title size="small" text-center>
-        © 2024 HasbiTech. Todos los derechos reservados.
-      </ion-title>
-    </ion-toolbar>
-  </ion-footer>
-  
+    <!-- Botón de ajustes a la derecha -->
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <!-- Botón de QR sobreelevado -->
+  <div class="qr-button-container">
+    <ion-button class="qr-button" (click)="takePhoto()">
+      <ion-icon slot="icon-only" name="qr-code-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <ion-toolbar>
+    <ion-title size="small" text-center>
+      © 2024 HasbiTech. Todos los derechos reservados.
+    </ion-title>
+  </ion-toolbar>
 </ion-footer>
