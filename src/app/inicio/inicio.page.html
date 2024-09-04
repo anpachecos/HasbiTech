@@ -15,6 +15,13 @@
       </ion-menu-toggle>
 
       <ion-menu-toggle auto-hide="false">
+        <ion-item routerLink="/ajustes">
+          <ion-icon slot="start" name="settings-outline"></ion-icon>
+          <ion-label>Ajustes</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle auto-hide="false">
         <ion-item (click)="cerrarSesion()">
           <ion-icon slot="start" name="log-out-outline"></ion-icon>
           <ion-label>Cerrar Sesión</ion-label>
