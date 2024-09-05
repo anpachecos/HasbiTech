@@ -7,45 +7,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AjustesPage implements OnInit {
 
-
   paletteToggle = false;
 
-  constructor() {
-    this.initDarkMode();
-   }
+  constructor() {}
 
   ngOnInit() {
-
+    // Leer el estado guardado del modo oscuro desde el localStorage
+    const storedThemePreference = localStorage.getItem('darkMode');
+    if (storedThemePreference) {
+      this.paletteToggle = JSON.parse(storedThemePreference);
+      this.toggleDarkPalette(this.paletteToggle);
+    }
   }
 
-
-  initDarkMode(){
-
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-
-    // Initialize the dark palette based on the initial
-    // value of the prefers-color-scheme media query
-    this.initializeDarkPalette(prefersDark.matches);
-
-    // Listen for changes to the prefers-color-scheme media query
-    prefersDark.addEventListener('change', (mediaQuery) => this.initializeDarkPalette(mediaQuery.matches));
-
-  }
-
-
-  initializeDarkPalette(isDark: any) {
-    this.paletteToggle = isDark;
-    this.toggleDarkPalette(isDark);
-  }
-
-  // Listen for the toggle check/uncheck to toggle the dark palette
+  // Manejar el cambio desde el botón y guardar el estado en localStorage
   toggleChange(ev: any) {
-    this.toggleDarkPalette(ev.detail.checked);
+    this.paletteToggle = ev.detail.checked;
+    localStorage.setItem('darkMode', JSON.stringify(this.paletteToggle)); // Guardar en localStorage
+    this.toggleDarkPalette(this.paletteToggle);
   }
 
-  // Add or remove the "ion-palette-dark" class on the html element
+  // Agregar o eliminar la clase "ion-palette-dark" en el elemento html
   toggleDarkPalette(shouldAdd: boolean) {
     document.documentElement.classList.toggle('ion-palette-dark', shouldAdd);
-  
-}
+  }
 }
