@@ -85,14 +85,14 @@
   <ion-toolbar>
     <!-- Botón de calendario a la izquierda -->
     <ion-buttons slot="start">
-      <ion-button>
+      <ion-button [routerLink]="['/mis-asistencias']">
         <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
 
     <!-- Botón de ajustes a la derecha -->
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button [routerLink]="['/ajustes']">
         <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
