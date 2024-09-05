@@ -45,7 +45,7 @@ export class InicioPage implements OnInit {
     },
     {
       titulo: 'ESTADÍSTICA DESCRIPTIVA',
-      fecha: '2024-09-07',
+      fecha: '2024-09-05',
       ubicacion: 'SALA SJ-L4',
       descripcion: 'Sección MAT4140'
     }
