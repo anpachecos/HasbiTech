@@ -1,20 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from '@angular/forms';
-
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AlertController, NavController } from '@ionic/angular';
-
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
   styleUrls: ['./registro.page.scss'],
 })
-
 export class RegistroPage implements OnInit {
 
   formularioRecuperar: FormGroup;
@@ -24,16 +16,15 @@ export class RegistroPage implements OnInit {
     public alertController: AlertController,
     public navCtrl: NavController  ) { 
     
+    // Agrega la validación de coincidencia de contraseñas al FormGroup
     this.formularioRecuperar = this.fb.group({
       'nombre': new FormControl("", Validators.required),
       'password': new FormControl("", Validators.required),
       'confirmacionPassword': new FormControl("", Validators.required),
-    });
-
+    }, { validator: this.passwordMatchValidator });  // Aquí se agrega el validador personalizado
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   passwordMatchValidator(formGroup: FormGroup) {
     const password = formGroup.get('password')?.value;
@@ -41,12 +32,11 @@ export class RegistroPage implements OnInit {
     return password === confirmPassword ? null : { mismatch: true };
   }
 
-
   async recuperar() {
     var f = this.formularioRecuperar.value;
     var usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
-  
-    // Verifica si el formulario es válido
+
+    // Verifica si el formulario es inválido o si las contraseñas no coinciden
     if (this.formularioRecuperar.invalid) {
       const alert = await this.alertController.create({
         header: '¡Error!',
@@ -56,23 +46,23 @@ export class RegistroPage implements OnInit {
       await alert.present();
       return;
     }
-  
+
     // Verifica si el nombre de usuario existe
     if (usuario.nombre === f.nombre) {
       // Actualiza la contraseña en el objeto usuario
       usuario.password = f.password;
       localStorage.setItem('usuario', JSON.stringify(usuario));
-  
+
       // Actualiza también la contraseña individual en localStorage
       localStorage.setItem('passwordUsuario', f.password);
-  
+
       const alert = await this.alertController.create({
         header: '¡Contraseña Restablecida!',
         message: 'Tu contraseña ha sido actualizada correctamente.',
         buttons: ['Aceptar']
       });
       await alert.present();
-  
+
       this.navCtrl.navigateRoot('login');
     } else {
       const alert = await this.alertController.create({
@@ -83,6 +73,5 @@ export class RegistroPage implements OnInit {
       await alert.present();
     }
   }
-  
 
 }
