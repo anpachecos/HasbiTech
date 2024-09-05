@@ -26,8 +26,9 @@
 
     <!-- Sección de Tema oscuro -->
     <ion-item>
-      <ion-label>Tema oscuro</ion-label>
-      <ion-toggle slot="end"></ion-toggle>
+      <ion-toggle [(ngModel)]="paletteToggle" (ionChange)="toggleChange($event)" justify="space-between"
+        >Tema oscuro</ion-toggle
+      >
     </ion-item>
 
     <!-- Sección de Idioma -->
