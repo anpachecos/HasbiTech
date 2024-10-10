@@ -6,9 +6,27 @@ import { IngresadoGuard } from './ingresado.guard';
 const routes: Routes = [
     {
     path: '',
-    redirectTo: 'welcome',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
+  {
+    path: 'login',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'inicio',
+    redirectTo: 'inicio',
+    pathMatch: 'full'
+  },
+  //aquiiiii 404
+  // Si hago más cosas, osea rutas, tienen que ir en orden porque va validando de arriba hacia abajo
+  {
+    path: '**',
+    redirectTo: 'not-found',
+    pathMatch: 'full'
+  },
+
   {
     path: 'registro',
     loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule),
@@ -38,7 +56,8 @@ const routes: Routes = [
     path: 'ajustes',
     loadChildren: () => import('./ajustes/ajustes.module').then( m => m.AjustesPageModule),
     canActivate: [IngresadoGuard]
-  },  {
+  },
+  {
     path: 'not-found',
     loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
