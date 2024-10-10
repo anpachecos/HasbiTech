@@ -38,7 +38,11 @@ const routes: Routes = [
     path: 'ajustes',
     loadChildren: () => import('./ajustes/ajustes.module').then( m => m.AjustesPageModule),
     canActivate: [IngresadoGuard]
+  },  {
+    path: 'not-found',
+    loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
+
 
 
 
