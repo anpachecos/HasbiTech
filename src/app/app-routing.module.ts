@@ -19,14 +19,6 @@ const routes: Routes = [
     redirectTo: 'inicio',
     pathMatch: 'full'
   },
-  //aquiiiii 404
-  // Si hago más cosas, osea rutas, tienen que ir en orden porque va validando de arriba hacia abajo
-  {
-    path: '**',
-    redirectTo: 'not-found',
-    pathMatch: 'full'
-  },
-
   {
     path: 'registro',
     loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule),
@@ -61,6 +53,15 @@ const routes: Routes = [
     path: 'not-found',
     loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
+
+  //aquiiiii 404
+  // Si hago más cosas, osea rutas, tienen que ir en orden porque va validando de arriba hacia abajo
+  //Recordar que está bugeado el color, si tu pones modo oscuro te va atirar a la 404 en blanco. 
+  {
+    path: '**',
+    redirectTo: 'not-found',
+    pathMatch: 'full'
+  }
 
 
 
