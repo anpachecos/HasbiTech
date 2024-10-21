@@ -1,12 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 
-
-// Este código lo saqué de aquí:
-// https://github.com/ionic-team/ionic-storage
-// Si bien tiene uun apartado por componente, no nos sirve para este caso
-// Ya que necesitamos que el servicio esté disponible en toda la aplicación
-
 @Injectable({
   providedIn: 'root',
 })
@@ -21,6 +15,19 @@ export class StorageService {
   async init() {
     const storage = await this.storage.create();
     this._storage = storage;
+
+    // Crear una lista de usuarios de prueba si no existen
+    const usuariosExistentes = await this.get('usuarios');
+    if (!usuariosExistentes) {
+      const usuarios = [
+        { nombre: 'antonia', password: '12345' },
+        { nombre: 'luis', password: 'password123' },
+        { nombre: 'juan', password: 'abcde' }
+      ];
+
+      // Guardar la lista de usuarios en el almacenamiento
+      await this.set('usuarios', usuarios);
+    }
   }
 
   // Guardar un valor

@@ -2,30 +2,28 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { StorageService } from './services/storage.service'; // Importa el servicio de almacenamiento
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class IngresadoGuard implements CanActivate {
 
-  constructor(public navCtrl: NavController){} // Recuerda que debes importar NavController de '@ionic/angular' y primero debes pónerselo en el constructor.
+  constructor(public navCtrl: NavController, private storageService: StorageService) {} // Inyectar el servicio de almacenamiento
 
-
-
-  canActivate(
+  async canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    state: RouterStateSnapshot
+  ): Promise<boolean | UrlTree> {
     
-      if(localStorage.getItem('ingresado') /*Si ingresado es true, el código que pusimos en login. */){
-        return true;
-      } else {
-        this.navCtrl.navigateRoot('login'); //Si no está ingresado, lo redirigimos a login.
-        return false;
-
-      }
-
-
+    // Usar Ionic Storage para verificar si el usuario está ingresado
+    const ingresado = await this.storageService.get('ingresado');
+    
+    if (ingresado) {
+      return true; // Permitir acceso
+    } else {
+      this.navCtrl.navigateRoot('login'); // Redirigir a la página de login si no está autenticado
+      return false;
+    }
   }
-  
 }
