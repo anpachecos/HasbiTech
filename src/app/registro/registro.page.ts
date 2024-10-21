@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AlertController, NavController } from '@ionic/angular';
+import { StorageService } from '../services/storage.service'; // Importar el servicio de almacenamiento
 
 @Component({
   selector: 'app-registro',
@@ -14,7 +15,9 @@ export class RegistroPage implements OnInit {
   constructor(
     public fb: FormBuilder, 
     public alertController: AlertController,
-    public navCtrl: NavController  ) { 
+    public navCtrl: NavController,
+    private storageService: StorageService // Inyectar el servicio de almacenamiento
+  ) { 
     
     // Agrega la validación de coincidencia de contraseñas al FormGroup
     this.formularioRecuperar = this.fb.group({
@@ -26,15 +29,16 @@ export class RegistroPage implements OnInit {
 
   ngOnInit() {}
 
+  // Validador personalizado para verificar que las contraseñas coincidan
   passwordMatchValidator(formGroup: FormGroup) {
     const password = formGroup.get('password')?.value;
     const confirmPassword = formGroup.get('confirmacionPassword')?.value;
     return password === confirmPassword ? null : { mismatch: true };
   }
 
+  // Función para cambiar la contraseña
   async recuperar() {
-    var f = this.formularioRecuperar.value;
-    var usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+    const f = this.formularioRecuperar.value;
 
     // Verifica si el formulario es inválido o si las contraseñas no coinciden
     if (this.formularioRecuperar.invalid) {
@@ -47,14 +51,19 @@ export class RegistroPage implements OnInit {
       return;
     }
 
-    // Verifica si el nombre de usuario existe
-    if (usuario.nombre === f.nombre) {
-      // Actualiza la contraseña en el objeto usuario
-      usuario.password = f.password;
-      localStorage.setItem('usuario', JSON.stringify(usuario));
+    // Obtener la lista de usuarios desde Ionic Storage
+    const usuarios = await this.storageService.get('usuarios') || [];
 
-      // Actualiza también la contraseña individual en localStorage
-      localStorage.setItem('passwordUsuario', f.password);
+    // Encontrar el usuario en la lista
+    const usuario = usuarios.find((u: any) => u.nombre === f.nombre);
+
+    // Verificar si el nombre de usuario existe
+    if (usuario) {
+      // Actualizar la contraseña del usuario
+      usuario.password = f.password;
+
+      // Actualizar la lista de usuarios en Ionic Storage
+      await this.storageService.set('usuarios', usuarios);
 
       const alert = await this.alertController.create({
         header: '¡Contraseña Restablecida!',
